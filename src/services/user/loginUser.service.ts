@@ -4,11 +4,12 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities";
 import { AppError } from "../../error";
-import { tLoginUser } from "../../interfaces/user.interfaces";
+import { tLoginReturn, tLoginUser } from "../../interfaces/user.interfaces";
+import { loginReturnSchema } from "../../schemas/user.schemas";
 
 export const loginUserService = async (
   payload: tLoginUser
-): Promise<string> => {
+): Promise<tLoginReturn> => {
   const userRepo: Repository<User> = AppDataSource.getRepository(User);
 
   const user = await userRepo.findOneBy({ email: payload.email });
@@ -29,5 +30,10 @@ export const loginUserService = async (
     { expiresIn: "72h", subject: String(user.id) }
   );
 
-  return token;
+  const returnLogin = loginReturnSchema.parse({
+    ...user,
+    token: token
+  })
+
+  return returnLogin
 };
