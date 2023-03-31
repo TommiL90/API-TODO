@@ -7,7 +7,7 @@ class Task {
   id: number;
 
   @Column({length: 50})
-  tile: string;
+  title: string;
 
   @Column({ length: 300 })
   description: string;

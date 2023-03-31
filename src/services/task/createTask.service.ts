@@ -2,10 +2,11 @@ import { Repository } from "typeorm"
 import { AppDataSource } from "../../data-source"
 import { Task, User } from "../../entities"
 import { AppError } from "../../error"
-import { tCreateTask, tTask } from "../../interfaces/task.interfaces"
-import { taskSchema } from "../../schemas/task.schemas"
+import { tCreateTask, tReturnCreateTask } from "../../interfaces/task.interfaces"
+import { returnCreatetaskSchema } from "../../schemas/task.schemas"
 
-export const createTaskService = async (payload: tCreateTask, idUser: number): Promise<tTask> => {
+
+export const createTaskService = async (payload: tCreateTask, idUser: number): Promise<tReturnCreateTask> => {
 
     const userRepo: Repository<User> = AppDataSource.getRepository(User)
 
@@ -24,6 +25,6 @@ export const createTaskService = async (payload: tCreateTask, idUser: number): P
 
     await taskRepo.save(task)
 
-    return taskSchema.parse(task)
+    return returnCreatetaskSchema.parse(task)
 }
 

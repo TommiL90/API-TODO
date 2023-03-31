@@ -32,6 +32,5 @@ export const loginReturnSchema = z.object({
     id: z.number().positive().int(),
     name: z.string().max(45),
     email: z.string().email().max(100),
-    password: z.string().max(120),
     token: z.string()
 })

@@ -16,3 +16,6 @@ export const createTaskSchema = taskSchema.omit({
     updatedAt: true,
     user: true
 })
+ export const returnCreatetaskSchema = taskSchema.omit({
+    user: true
+ })

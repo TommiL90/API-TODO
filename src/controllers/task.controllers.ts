@@ -10,7 +10,7 @@ export const createTaskController = async (
   const data: tCreateTask = request.body;
   const { id } = request.user;
 
-  const newtask: tTask = await services.createTaskService(data, id);
+  const newtask: Omit<tTask, "user"> = await services.createTaskService(data, id);
 
   return response.status(201).json(newtask);
 };
@@ -32,7 +32,7 @@ export const completeTaskController = async (
 ) => {
   const id: number = +request.params.id;
 
-  const taskList: Array<Task> = await services.listTasksByIdUser(id);
+  const taskList: Task = await services.completeTaskService(id);
 
   return response.status(200).json(taskList);
 };
