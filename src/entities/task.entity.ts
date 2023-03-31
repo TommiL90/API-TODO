@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import User from "./user.entity";
 
 @Entity("tasks")
@@ -9,8 +9,17 @@ class Task {
   @Column({length: 50})
   tile: string;
 
-  @Column({ length: 150 })
+  @Column({ length: 300 })
   description: string;
+
+  @Column({default: false})
+  completed: boolean
+
+  @CreateDateColumn({type:"date"})
+  createdAt: string;
+
+  @UpdateDateColumn({type:"date"})
+  updatedAt: string;
 
   @ManyToOne(() => User, {onDelete: 'CASCADE'})
   user: User;
