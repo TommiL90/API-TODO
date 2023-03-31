@@ -27,6 +27,9 @@
   },
   "scripts": {
     "typeorm": "typeorm-ts-node-commonjs",
-    "dev": "ts-node-dev --ignore-watch node_modules --cls --rs src/server.ts"
+    "dev": "ts-node-dev --ignore-watch node_modules --cls --rs src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "migration:prod": "yarn typeorm migration:run -d dist/data-source"
   }
 }
